@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 from ui.post_ui import PostUI
 from ui.feed_ui import FeedUI
+from ui.profile_ui import ProfileUI
 
 
 class DashboardUI:
@@ -70,7 +71,7 @@ class DashboardUI:
         PostUI(self.root, self.user, self.show_dashboard)
 
     def view_profile(self):
-        messagebox.showinfo("Profile", "Profile module will be added here.")
+        ProfileUI(self.root, self.user, self.show_dashboard)
 
     def logout(self):
         confirm = messagebox.askyesno("Logout", "Are you sure you want to logout?")
