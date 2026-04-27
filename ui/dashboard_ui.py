@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
+from ui.post_ui import PostUI
+from ui.feed_ui import FeedUI
 
 
 class DashboardUI:
@@ -62,10 +64,10 @@ class DashboardUI:
         ).pack(pady=20)
 
     def view_feed(self):
-        messagebox.showinfo("View Feed", "Feed module will be added here.")
+        FeedUI(self.root, self.user, self.show_dashboard)
 
     def create_post(self):
-        messagebox.showinfo("Create Post", "Post creation module will be added here.")
+        PostUI(self.root, self.user, self.show_dashboard)
 
     def view_profile(self):
         messagebox.showinfo("Profile", "Profile module will be added here.")
