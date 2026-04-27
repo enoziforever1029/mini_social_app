@@ -1,43 +1,27 @@
-class User:
-    def __init__(
-        self,
-        user_id=None,
-        username=None,
-        email=None,
-        password_hash=None,
-        display_name=None,
-        bio=None,
-        profile_picture_path=None,
-        created_at=None,
-        updated_at=None
-    ):
-        self.user_id = user_id
-        self.username = username
-        self.email = email
-        self.password_hash = password_hash
-        self.display_name = display_name
-        self.bio = bio
-        self.profile_picture_path = profile_picture_path
-        self.created_at = created_at
-        self.updated_at = updated_at
+from dataclasses import dataclass
+from datetime import datetime
+from typing import Optional
 
-    @staticmethod
-    def from_db_row(row):
-       
-        if row is None:
-            return None
+from .base_model import BaseModel
 
-        return User(
-            user_id=row.get("user_id"),
-            username=row.get("username"),
-            email=row.get("email"),
-            password_hash=row.get("password_hash"),
-            display_name=row.get("display_name"),
-            bio=row.get("bio"),
-            profile_picture_path=row.get("profile_picture_path"),
-            created_at=row.get("created_at"),
-            updated_at=row.get("updated_at")
-        )
+
+@dataclass
+class User(BaseModel):
+    user_id: Optional[int] = None
+    username: Optional[str] = None
+    email: Optional[str] = None
+    password_hash: Optional[str] = None
+    display_name: Optional[str] = None
+    bio: Optional[str] = None
+    profile_picture_path: Optional[str] = None
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
+
+    def public_dict(self):
+        """Return user data that is safe to show in UI or future API responses."""
+        data = self.to_dict()
+        data.pop("password_hash", None)
+        return data
 
     def __str__(self):
         return f"User({self.user_id}, {self.username}, {self.email})"
