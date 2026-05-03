@@ -1,1 +1,1 @@
-﻿# mini_social_app
+﻿# Mini Social App
