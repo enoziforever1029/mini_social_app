@@ -1,8 +1,17 @@
-import tkinter as tk
 from tkinter import messagebox
+
 from ui.post_ui import PostUI
 from ui.feed_ui import FeedUI
 from ui.profile_ui import ProfileUI
+from ui.components import (
+    clear_window,
+    create_page_frame,
+    create_title,
+    create_subtitle,
+    create_primary_button,
+    create_secondary_button,
+    create_plain_button,
+)
 
 
 class DashboardUI:
@@ -18,51 +27,20 @@ class DashboardUI:
         self.show_dashboard()
 
     def clear_window(self):
-        for widget in self.root.winfo_children():
-            widget.destroy()
+        clear_window(self.root)
 
     def show_dashboard(self):
         self.clear_window()
 
-        tk.Label(
-            self.root,
-            text="Mini Social App",
-            font=("Arial", 24, "bold")
-        ).pack(pady=20)
+        frame = create_page_frame(self.root)
 
-        tk.Label(
-            self.root,
-            text=f"Welcome, {self.user.username}!",
-            font=("Arial", 14)
-        ).pack(pady=10)
+        create_title(frame, "Mini Social App").pack(pady=20)
+        create_subtitle(frame, f"Welcome, {self.user.username}!").pack(pady=10)
 
-        tk.Button(
-            self.root,
-            text="View Feed",
-            width=25,
-            command=self.view_feed
-        ).pack(pady=8)
-
-        tk.Button(
-            self.root,
-            text="Create Post",
-            width=25,
-            command=self.create_post
-        ).pack(pady=8)
-
-        tk.Button(
-            self.root,
-            text="Profile",
-            width=25,
-            command=self.view_profile
-        ).pack(pady=8)
-
-        tk.Button(
-            self.root,
-            text="Logout",
-            width=25,
-            command=self.logout
-        ).pack(pady=20)
+        create_primary_button(frame, "View Feed", self.view_feed, width=220).pack(pady=8)
+        create_secondary_button(frame, "Create Post", self.create_post, width=220).pack(pady=8)
+        create_plain_button(frame, "Profile", self.view_profile, width=220).pack(pady=8)
+        create_plain_button(frame, "Logout", self.logout, width=220).pack(pady=20)
 
     def view_feed(self):
         FeedUI(self.root, self.user, self.show_dashboard)
