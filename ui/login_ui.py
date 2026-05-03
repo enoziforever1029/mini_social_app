@@ -1,7 +1,17 @@
-import tkinter as tk
 from tkinter import messagebox
+
 from controllers.auth_controller import AuthController
 from ui.dashboard_ui import DashboardUI
+from ui.components import (
+    clear_window,
+    create_page_frame,
+    create_title,
+    create_section_title,
+    create_label,
+    create_entry,
+    create_primary_button,
+    create_secondary_button,
+)
 
 
 class LoginUI:
@@ -14,54 +24,55 @@ class LoginUI:
         self.show_login_form()
 
     def clear_window(self):
-        for widget in self.root.winfo_children():
-            widget.destroy()
+        clear_window(self.root)
 
     def show_login_form(self):
         self.clear_window()
 
-        tk.Label(self.root, text="Mini Social App", font=("Arial", 20, "bold")).pack(pady=20)
-        tk.Label(self.root, text="Login", font=("Arial", 14)).pack(pady=10)
+        frame = create_page_frame(self.root)
 
-        tk.Label(self.root, text="Username").pack()
-        self.login_username = tk.Entry(self.root, width=30)
+        create_title(frame, "Mini Social App").pack(pady=20)
+        create_section_title(frame, "Login").pack(pady=10)
+
+        create_label(frame, "Username").pack()
+        self.login_username = create_entry(frame, placeholder_text="Enter username")
         self.login_username.pack(pady=5)
 
-        tk.Label(self.root, text="Password").pack()
-        self.login_password = tk.Entry(self.root, width=30, show="*")
+        create_label(frame, "Password").pack()
+        self.login_password = create_entry(frame, show="*", placeholder_text="Enter password")
         self.login_password.pack(pady=5)
 
-        tk.Button(self.root, text="Login", width=20, command=self.login).pack(pady=15)
-        tk.Button(self.root, text="Create Account", width=20, command=self.show_register_form).pack()
-        
+        create_primary_button(frame, "Login", self.login).pack(pady=15)
+        create_secondary_button(frame, "Create Account", self.show_register_form).pack()
+
         self.login_username.focus_set()
-        
         self.login_username.bind("<Return>", lambda event: self.login_password.focus_set())
         self.login_password.bind("<Return>", lambda event: self.login())
 
     def show_register_form(self):
         self.clear_window()
 
-        tk.Label(self.root, text="Mini Social App", font=("Arial", 20, "bold")).pack(pady=20)
-        tk.Label(self.root, text="Register", font=("Arial", 14)).pack(pady=10)
+        frame = create_page_frame(self.root)
 
-        tk.Label(self.root, text="Username").pack()
-        self.register_username = tk.Entry(self.root, width=30)
+        create_title(frame, "Mini Social App").pack(pady=20)
+        create_section_title(frame, "Register").pack(pady=10)
+
+        create_label(frame, "Username").pack()
+        self.register_username = create_entry(frame, placeholder_text="Choose a username")
         self.register_username.pack(pady=5)
 
-        tk.Label(self.root, text="Email").pack()
-        self.register_email = tk.Entry(self.root, width=30)
+        create_label(frame, "Email").pack()
+        self.register_email = create_entry(frame, placeholder_text="Enter email")
         self.register_email.pack(pady=5)
 
-        tk.Label(self.root, text="Password").pack()
-        self.register_password = tk.Entry(self.root, width=30, show="*")
+        create_label(frame, "Password").pack()
+        self.register_password = create_entry(frame, show="*", placeholder_text="Choose a password")
         self.register_password.pack(pady=5)
 
-        tk.Button(self.root, text="Register", width=20, command=self.register).pack(pady=15)
-        tk.Button(self.root, text="Back to Login", width=20, command=self.show_login_form).pack()
-        
+        create_primary_button(frame, "Register", self.register).pack(pady=15)
+        create_secondary_button(frame, "Back to Login", self.show_login_form).pack()
+
         self.register_username.focus_set()
-        
         self.register_username.bind("<Return>", lambda event: self.register_email.focus_set())
         self.register_email.bind("<Return>", lambda event: self.register_password.focus_set())
         self.register_password.bind("<Return>", lambda event: self.register())
