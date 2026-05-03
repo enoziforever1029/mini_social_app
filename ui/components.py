@@ -1,25 +1,16 @@
 import customtkinter as ctk
 
 
-# =========================
-# COLORS / THEME SETTINGS
-# =========================
-
 BG_COLOR = ("#F5F5F5", "#1A1A1B")
 CARD_COLOR = ("#FFFFFF", "#272729")
-PRIMARY_COLOR = "#FF4500"       # Reddit-like orange
+PRIMARY_COLOR = "#FF4500"
 PRIMARY_HOVER = "#CC3700"
-SECONDARY_COLOR = "#0079D3"     # Reddit-like blue
+SECONDARY_COLOR = "#0079D3"
 SECONDARY_HOVER = "#005FA3"
 TEXT_COLOR = ("#1C1C1C", "#D7DADC")
 MUTED_TEXT_COLOR = ("#666666", "#818384")
 BORDER_COLOR = ("#D7D7D7", "#343536")
 TRANSPARENT = "transparent"
-
-
-# =========================
-# WINDOW / PAGE HELPERS
-# =========================
 
 def clear_window(root):
     for widget in root.winfo_children():
@@ -56,11 +47,6 @@ def create_header(parent, title, right_button_text=None, right_button_command=No
         ).pack(side="right")
 
     return header
-
-
-# =========================
-# LABEL COMPONENTS
-# =========================
 
 def create_title(parent, text, **kwargs):
     return ctk.CTkLabel(
@@ -111,11 +97,6 @@ def create_label(parent, text, **kwargs):
         **kwargs
     )
 
-
-# =========================
-# INPUT COMPONENTS
-# =========================
-
 def create_entry(parent, show=None, width=280, placeholder_text="", **kwargs):
     return ctk.CTkEntry(
         parent,
@@ -139,11 +120,6 @@ def create_text_area(parent, width=500, height=150, **kwargs):
         border_width=kwargs.pop("border_width", 1),
         **kwargs
     )
-
-
-# =========================
-# BUTTON COMPONENTS
-# =========================
 
 def create_primary_button(parent, text, command, width=160, **kwargs):
     return ctk.CTkButton(
@@ -192,10 +168,6 @@ def create_plain_button(parent, text, command, width=160, **kwargs):
     )
 
 
-# =========================
-# FRAME COMPONENTS
-# =========================
-
 def create_card(parent, **kwargs):
     return ctk.CTkFrame(
         parent,
@@ -222,10 +194,6 @@ def create_scrollable_frame(parent, **kwargs):
         **kwargs
     )
 
-
-# =========================
-# POST CARD COMPONENT
-# =========================
 
 def create_post_card(
     parent,
